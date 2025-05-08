@@ -47,7 +47,7 @@ export default function Home() {
           mountOnEnter
           unmountOnExit
         >
-          <div className="absolute top-0 left-0 w-full h-full">{content}</div>
+          <div>{content}</div>
         </CSSTransition>
       </main>
       <Navigation onNavigate={handleNavigation} />
