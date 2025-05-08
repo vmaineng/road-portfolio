@@ -6,6 +6,7 @@ import Projects from "./components/Projects";
 import Socials from "./components/Socials";
 import Contact from "./components/Contact";
 import { CSSTransition } from "react-transition-group";
+import Map from "./components/Map";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState<string>("about");
@@ -35,6 +36,9 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
+        <div className="mb-8">
+          <Map onNavigate={handleNavigation} />
+        </div>
         <CSSTransition
           key={currentSection}
           in={true}
