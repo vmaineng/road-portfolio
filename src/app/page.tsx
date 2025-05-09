@@ -16,7 +16,7 @@ export default function Home() {
   };
 
   const destinations = {
-    about: { label: "About Me", coordinates: [-122.4194, 37.774] },
+    about: { label: "About Me", coordinates: [-118.2437, 34.0522] },
     projects: { label: "Projects", coordinates: [-93.0913, 44.9545] },
     socials: { label: "Socials", coordinates: [-89.5745, 44.5178] },
     contact: { label: "Contact", coordinates: [-123.133, 49.25] },
