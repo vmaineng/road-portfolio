@@ -51,8 +51,8 @@ const Projects: React.FC = () => {
                 <Image
                   src={project.image}
                   alt={project.title}
-                  layout="fill"
-                  objectFit="cover"
+                  width={256}
+                  height={256}
                 />
               </div>
               <div className="p-6">

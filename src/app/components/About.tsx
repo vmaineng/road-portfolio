@@ -11,8 +11,8 @@ const About: React.FC = () => {
               <Image
                 src="/profilePic.png"
                 alt="Your Profile Picture"
-                layout="fill"
-                objectFit="cover"
+                width={256}
+                height={256}
               />
             </div>
           </div>
