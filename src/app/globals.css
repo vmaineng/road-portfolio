@@ -41,7 +41,6 @@ body {
   transition: opacity 300ms ease-out;
 }
 
-/* Slide from left transition */
 .slide-left-enter {
   transform: translateX(-100%);
   opacity: 0;
@@ -59,4 +58,26 @@ body {
   transform: translateX(-100%);
   opacity: 0;
   transition: transform 300ms ease-in, opacity 300ms ease-in;
+}
+
+.safety-pin-marker {
+  width: 16px;
+  height: 16px;
+  background-color: #e91e63; 
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  border-left: 1px solid #b01257;
+  border-top: 1px solid #b01257;
+}
+
+.safety-pin-marker::after {
+  content: '';
+  position: absolute;
+  bottom: -6px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: #b01257;
+  transform: translateX(-50%);
 }

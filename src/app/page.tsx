@@ -6,12 +6,20 @@ import Projects from "./components/Projects";
 import Socials from "./components/Socials";
 import Contact from "./components/Contact";
 import { CSSTransition } from "react-transition-group";
+import WorldMapGL from "./components/WordMapGL";
 
 export default function Home() {
   const [currentSection, setCurrentSection] = useState<string>("about");
 
   const handleNavigation = (section: string) => {
     setCurrentSection(section);
+  };
+
+  const destinations = {
+    about: { label: "About Me", coordinates: [-122.4194, 37.774] },
+    projects: { label: "Projects", coordinates: [-93.0913, 44.9545] },
+    socials: { label: "Socials", coordinates: [-89.5745, 44.5178] },
+    contact: { label: "Contact", coordinates: [-123.133, 49.25] },
   };
 
   let content;
@@ -35,6 +43,12 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col">
       <main className="flex-grow">
+        <div className="mb-8">
+          <WorldMapGL
+            onNavigate={handleNavigation}
+            currentDestination={destinations[currentSection].coordinates}
+          />
+        </div>
         <CSSTransition
           key={currentSection}
           in={true}

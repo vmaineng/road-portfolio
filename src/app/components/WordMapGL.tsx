@@ -7,20 +7,25 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "";
 
 interface WorldMapGLProps {
   onNavigate: (section: string) => void;
+  currentDestination: [number, number];
 }
 
-const WorldMapGL: React.FC<WorldMapGLProps> = ({ onNavigate }) => {
+const WorldMapGL: React.FC<WorldMapGLProps> = ({
+  onNavigate,
+  currentDestination,
+}) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
+  const marker = useRef<mapboxgl.Marker | null>(null);
   const [lng, setLng] = useState(-118.2437);
   const [lat, setLat] = useState(34.0522);
   const [zoom, setZoom] = useState(2);
 
   const destinations = {
-    about: { label: "About Me", coordinates: [-122.4194, 37.774] }, //SF
-    projects: { label: "Projects", coordinates: [-74.006, 40.7128] }, //MN
-    socials: { label: "Socials", coordinates: [0.1278, 51.5074] }, // WI
-    contact: { label: "Contact", coordinates: [2.3522, 48.8566] }, //Bali
+    about: { label: "About Me", coordinates: [-122.4194, 37.774] },
+    projects: { label: "Projects", coordinates: [-93.0913, 44.9545] },
+    socials: { label: "Socials", coordinates: [-89.5745, 44.5178] },
+    contact: { label: "Contact", coordinates: [-123.133, 49.25] },
   };
 
   useEffect(() => {
@@ -39,33 +44,36 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({ onNavigate }) => {
       setZoom(parseFloat(map.current!.getZoom().toFixed(2)));
     });
 
-    // Add markers for each destination
-    Object.entries(destinations).forEach(([section, data]) => {
-      const markerEl = document.createElement("div");
-      markerEl.className = "marker";
-      markerEl.style.background = getColorForSection(section); // Function to get a color
-      markerEl.style.width = "12px";
-      markerEl.style.height = "12px";
-      markerEl.style.borderRadius = "50%";
-      markerEl.style.cursor = "pointer";
+    const markerEl = document.createElement("div");
+    markerEl.className = "safety-pin-marker";
+    markerEl.style.cursor = "pointer";
+    marker.current = new mapboxgl.Marker(markerEl)
+      .setLngLat(currentDestination)
+      .addTo(map.current!);
 
-      new mapboxgl.Marker(markerEl)
-        .setLngLat(data.coordinates as [number, number])
-        .setPopup(
-          new mapboxgl.Popup({ offset: 25 }).setHTML(
-            `<h3>${data.label}</h3><p>Click to visit</p>`
-          )
-        )
-        .addTo(map.current!)
-        .getElement()
-        .addEventListener("click", () => {
-          map.current!.flyTo({
-            center: data.coordinates,
-            zoom: 6,
-            essential: true,
-          });
-          setTimeout(() => onNavigate(section), 1500); // Delay navigation
+    Object.entries(destinations).forEach(([section, data]) => {
+      const el = document.createElement("div");
+      el.style.position = "absolute";
+      el.style.width = "20px";
+      el.style.height = "20px";
+      el.style.backgroundColor = "transparent";
+      el.style.borderRadius = "50%";
+      el.style.transform = "translate(-50%, -50%)";
+      el.style.cursor = "pointer";
+      const [lon, lat] = data.coordinates;
+      const pixel = map.current!.project([lon, lat]);
+      el.style.left = `${pixel.x}px`;
+      el.style.top = `${pixel.y}px`;
+
+      el.addEventListener("click", () => {
+        map.current!.flyTo({
+          center: data.coordinates as [number, number],
+          zoom: 6,
+          essential: true,
         });
+        setTimeout(() => onNavigate(section), 1500);
+      });
+      mapContainer.current!.appendChild(el);
     });
 
     return () => {
@@ -73,25 +81,25 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({ onNavigate }) => {
         map.current.remove();
       }
     };
-  }, [onNavigate]);
+  }, []);
 
-  // Helper function to get a color for each section
-  const getColorForSection = (section: string) => {
-    switch (section) {
-      case "about":
-        return "#1e88e5"; // Blue
-      case "projects":
-        return "#43a047"; // Green
-      case "socials":
-        return "#fdd835"; // Yellow
-      case "contact":
-        return "#d32f2f"; // Red
-      default:
-        return "#000";
+  useEffect(() => {
+    if (map.current && marker.current) {
+      map.current.flyTo({
+        center: currentDestination,
+        zoom: 6,
+        essential: true,
+      });
+      marker.current.setLngLat(currentDestination);
     }
-  };
+  }, [currentDestination]);
 
-  return <div ref={mapContainer} style={{ height: "400px", width: "100%" }} />;
+  return (
+    <div
+      ref={mapContainer}
+      style={{ height: "400px", width: "100%", position: "relative" }}
+    />
+  );
 };
 
 export default WorldMapGL;
