@@ -41,9 +41,9 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <main className="flex-grow">
-        <div className="mb-8">
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4 md:p-8 ">
+      <main className="flex-grow relative w-full max-w-screen-xl">
+        <div className="mb-8 w-full md:max-w-screen-md lg:max-w-screen-lg mx-auto">
           <WorldMapGL
             onNavigate={handleNavigation}
             currentDestination={destinations[currentSection].coordinates}
@@ -57,7 +57,7 @@ export default function Home() {
           mountOnEnter
           unmountOnExit
         >
-          <div>{content}</div>
+          <div className="w-full max-w-screen-lg mx-auto">{content}</div>
         </CSSTransition>
       </main>
       <Navigation onNavigate={handleNavigation} />

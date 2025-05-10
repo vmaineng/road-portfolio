@@ -33,19 +33,19 @@ const Contact: React.FC = () => {
   };
 
   return (
-    <section id="contact" className="py-16 bg-gray-100">
+    <section id="contact" className="py-16 bg-gray-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">
           Get In Touch
         </h2>
         <div className="md:grid md:grid-cols-2 md:gap-8">
           <div>
-            <p className="text-lg text-gray-700 mb-6">
+            <p className="text-lg text-white mb-6">
               I&apos;m always open to new opportunities and collaborations. Feel
               free to reach out through the form below or directly via email.
             </p>
             <div className="mb-4">
-              <strong className="text-gray-700">Email:</strong>{" "}
+              <strong className="text-white">Email:</strong>{" "}
               <a
                 href="mailto:your-email@example.com"
                 className="text-blue-500 hover:underline"
@@ -53,10 +53,6 @@ const Contact: React.FC = () => {
                 your-email@example.com
               </a>
             </div>
-            {/* Optional: Add phone number */}
-            {/* <div className="mb-4">
-              <strong className="text-gray-700">Phone:</strong> your-phone-number
-            </div> */}
           </div>
           <form
             onSubmit={handleSubmit}

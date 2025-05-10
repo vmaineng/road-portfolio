@@ -33,9 +33,10 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
 
     map.current = new mapboxgl.Map({
       container: mapContainer.current!,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [lng, lat],
+      style: "mapbox://styles/mapbox/streets-v9",
+      center: [0, 0],
       zoom: zoom,
+      projection: "globe",
     });
 
     map.current.on("move", () => {
@@ -50,6 +51,8 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
     marker.current = new mapboxgl.Marker(markerEl)
       .setLngLat(currentDestination)
       .addTo(map.current!);
+
+    marker.current.setLngLat(currentDestination);
 
     Object.entries(destinations).forEach(([section, data]) => {
       const el = document.createElement("div");

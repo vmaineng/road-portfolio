@@ -2,16 +2,13 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-// import project1Image from "/profilePic.png";
-// import project2Gif from "/profilePic.png";
-
 interface Project {
   title: string;
   description: string;
   technologies: string[];
-  liveDemo?: string;
+  website?: string;
   github?: string;
-  image: StaticImageData | string;
+  image: string;
 }
 
 const projectsData: Project[] = [
@@ -19,26 +16,43 @@ const projectsData: Project[] = [
     title: "Awesome Portfolio Website",
     description: "My personal portfolio showcasing my skills and projects.",
     technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-    liveDemo: "https://your-portfolio.com",
-    github: "https://github.com/your-username/portfolio",
+    website: "https://your-portfolio.com",
+    github: "https://github.com/vmaineng/road-portfolio",
     image: "/profilePic.png",
   },
   {
-    title: "Interactive Task Manager",
+    title: "Rephrase statuses",
     description:
       "A web application for managing tasks and projects collaboratively.",
-    technologies: ["React", "Redux", "Node.js", "Express", "MongoDB"],
-    liveDemo: "https://task-manager-app.com",
-    github: "https://github.com/your-username/task-manager",
+    technologies: ["React", "Open AI API", "Node.js", "Python", "Django"],
+    // website: "https://task-manager-app.com",
+    github: "https://github.com/vmaineng/rephrase-statuses",
     image: "/profilePic.png",
+  },
+  {
+    title: "GridIron Survivor",
+    description:
+      "An apprenticeship program for self-taught individuals looking to bridge the gap towards their first development job.",
+    technologies: [
+      "React",
+      "Next.js",
+      "Node.js",
+      "Express",
+      "Appwrite",
+      "Jest",
+      "Playwright",
+    ],
+    website: "https://www.gridironsurvivor.com/",
+    github: "https://github.com/LetsGetTechnical/gridiron-survivor",
+    image: "/gridiron.png",
   },
 ];
 
 const Projects: React.FC = () => {
   return (
-    <section id="projects" className="py-16 bg-gray-100">
+    <section id="projects" className="py-4 bg-gray-800">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">
+        <h2 className="text-3xl font-bold text-white mb-8 text-center">
           Projects I&apos;ve Worked On
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -47,12 +61,12 @@ const Projects: React.FC = () => {
               key={index}
               className="bg-white rounded-lg shadow-md overflow-hidden"
             >
-              <div className="relative h-48">
+              <div className="relative h-48 w-full">
                 <Image
                   src={project.image}
                   alt={project.title}
-                  width={256}
-                  height={256}
+                  fill={true}
+                  style={{ objectFit: "cover" }}
                 />
               </div>
               <div className="p-6">
@@ -73,14 +87,14 @@ const Projects: React.FC = () => {
                   ))}
                 </div>
                 <div className="flex gap-4">
-                  {project.liveDemo && (
+                  {project.website && (
                     <Link
-                      href={project.liveDemo}
+                      href={project.website}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-                        Live Demo
+                        Website
                       </button>
                     </Link>
                   )}
