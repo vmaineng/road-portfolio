@@ -1,36 +1,35 @@
 import React, { useState } from "react";
 
 const Contact: React.FC = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [submissionStatus, setSubmissionStatus] = useState<
-    "idle" | "loading" | "success" | "error"
-  >("idle");
-  const [errorMessage, setErrorMessage] = useState("");
+  // const [name, setName] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [message, setMessage] = useState("");
+  // const [submissionStatus, setSubmissionStatus] = useState<
+  //   "idle" | "loading" | "success" | "error"
+  // >("idle");
+  // const [errorMessage, setErrorMessage] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmissionStatus("loading");
-    setErrorMessage("");
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setSubmissionStatus("loading");
+  //   setErrorMessage("");
 
-    try {
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+  //   try {
+  //     await new Promise((resolve) => setTimeout(resolve, 1500));
 
-      // For a real implementation, you would likely send this data to a backend API
-      const formData = { name, email, message };
-      console.log("Form Data:", formData);
+  //     const formData = { name, email, message };
+  //     console.log("Form Data:", formData);
 
-      setSubmissionStatus("success");
-      setName("");
-      setEmail("");
-      setMessage("");
-    } catch (error: any) {
-      console.error("Form submission error:", error);
-      setSubmissionStatus("error");
-      setErrorMessage("Something went wrong. Please try again later.");
-    }
-  };
+  //     setSubmissionStatus("success");
+  //     setName("");
+  //     setEmail("");
+  //     setMessage("");
+  //   } catch (error: any) {
+  //     console.error("Form submission error:", error);
+  //     setSubmissionStatus("error");
+  //     setErrorMessage("Something went wrong. Please try again later.");
+  //   }
+  // };
 
   return (
     <section id="contact" className="py-16 bg-gray-800">
@@ -42,19 +41,19 @@ const Contact: React.FC = () => {
           <div>
             <p className="text-lg text-white mb-6">
               I&apos;m always open to new opportunities and collaborations. Feel
-              free to reach out through the form below or directly via email.
+              free to reach out via my social media handles to discuss more.
             </p>
-            <div className="mb-4">
-              <strong className="text-white">Email:</strong>{" "}
-              <a
+            {/* <div className="mb-4">
+              <strong className="text-white">Email:</strong>*/}
+            {/* <a
                 href="mailto:your-email@example.com"
                 className="text-blue-500 hover:underline"
               >
                 your-email@example.com
-              </a>
-            </div>
+              </a> */}
+            {/* </div> */}
           </div>
-          <form
+          {/* <form
             onSubmit={handleSubmit}
             className="bg-white shadow-md rounded-lg p-6"
           >
@@ -125,7 +124,7 @@ const Contact: React.FC = () => {
             {submissionStatus === "error" && (
               <p className="text-red-500 text-sm mt-2">{errorMessage}</p>
             )}
-          </form>
+          </form> */}
         </div>
       </div>
     </section>
