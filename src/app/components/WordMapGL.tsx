@@ -17,8 +17,6 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const marker = useRef<mapboxgl.Marker | null>(null);
-  const [lng, setLng] = useState(-118.2437);
-  const [lat, setLat] = useState(34.0522);
   const [zoom, setZoom] = useState(2);
 
   const destinations = {
