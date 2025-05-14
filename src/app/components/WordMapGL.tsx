@@ -9,18 +9,26 @@ interface WorldMapGLProps {
   currentDestination: [number, number];
 }
 
+interface Destination {
+  label: string;
+  coordinates: [number, number];
+}
+
 const WorldMapGL: React.FC<WorldMapGLProps> = ({
   onNavigate,
   currentDestination,
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<maplibregl.Map | null>(null);
-  const marker = useRef<maplibregl.Marker | null>(null);
+  const [markers, setMarkers] = useState<maplibregl.Marker[]>([]);
+  const [currentMarker, setCurrentMarker] = useState<maplibregl.Marker | null>(
+    null
+  );
   const [lng, setLng] = useState(-118.2437);
   const [lat, setLat] = useState(34.0522);
-  const [zoom, setZoom] = useState(2);
+  const [zoom, setZoom] = useState(6);
 
-  const destinations = {
+  const destinations: Record<Section, Destination> = {
     about: { label: "About Me", coordinates: [-118.2437, 34.0522] },
     projects: { label: "Projects", coordinates: [-93.0913, 44.9545] },
     socials: { label: "Socials", coordinates: [-89.5745, 44.5178] },
@@ -32,10 +40,26 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
 
     map.current = new maplibregl.Map({
       container: mapContainer.current!,
-      style: "https://demotiles.maplibre.org/style.json",
+      style: {
+        version: 8,
+        sources: {
+          osm: {
+            type: "raster",
+            tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+            tileSize: 40,
+            attribution: "© OpenStreetMap contributors",
+          },
+        },
+        layers: [
+          {
+            id: "osm",
+            type: "raster",
+            source: "osm",
+          },
+        ],
+      },
       center: [lng, lat],
       zoom: zoom,
-      projection: "globe",
     });
 
     map.current.on("move", () => {
@@ -44,14 +68,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
       setZoom(parseFloat(map.current!.getZoom().toFixed(2)));
     });
 
-    // const markerEl = document.createElement("div");
-    // markerEl.className = "safety-pin-marker";
-    // markerEl.style.cursor = "pointer";
-    // marker.current = new maplibregl.Marker(markerEl)
-    //   .setLngLat(currentDestination)
-    //   .addTo(map.current);
-
-    Object.entries(destinations).forEach(([section, data]) => {
+    const newMarkers = Object.entries(destinations).map(([section, data]) => {
       const sectionKey = section as Section;
       const el = document.createElement("div");
       el.className = "destination-marker";
@@ -60,45 +77,63 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
       el.style.backgroundColor = "red";
       el.style.borderRadius = "50%";
       el.style.cursor = "pointer";
-      marker.current = new maplibregl.Marker(el).setLngLat(currentDestination);
 
-      new maplibregl.Marker(el)
-        .setLngLat(data.coordinates as [number, number])
-        .addTo(map.current!)
-        .getElement()
-        .addEventListener("click", () => {
-          const bounds = new maplibregl.LngLatBounds()
-            .extend(map.current!.getCenter())
-            .extend(data.coordinates as [number, number]);
+      const marker = new maplibregl.Marker(el)
+        .setLngLat(data.coordinates)
+        .addTo(map.current!);
 
-          map.current!.fitBounds(bounds, {
-            padding: 10,
-            maxZoom: 100,
-          });
+      el.addEventListener("click", () => {
+        const bounds = new maplibregl.LngLatBounds()
+          .extend(map.current!.getCenter())
+          .extend(data.coordinates);
 
-          setTimeout(() => onNavigate(sectionKey), 500);
+        map.current!.fitBounds(bounds, {
+          padding: 50,
+          maxZoom: 15,
+          duration: 1000,
         });
+
+        setTimeout(() => onNavigate(sectionKey), 500);
+      });
+
+      return marker;
     });
 
+    setMarkers(newMarkers);
+
+    const currentEl = document.createElement("div");
+    currentEl.className = "current-marker";
+    currentEl.style.width = "20px";
+    currentEl.style.height = "20px";
+    currentEl.style.backgroundColor = "blue";
+    currentEl.style.borderRadius = "10%";
+
+    const marker = new maplibregl.Marker(currentEl)
+      .setLngLat(currentDestination)
+      .addTo(map.current!);
+
+    setCurrentMarker(marker);
+
     return () => {
-      if (map.current) {
-        map.current.remove();
-      }
+      markers.forEach((m) => m.remove());
+      if (currentMarker) currentMarker.remove();
+      if (map.current) map.current.remove();
     };
   }, []);
 
   useEffect(() => {
-    if (map.current && marker.current) {
+    if (map.current && currentMarker) {
       const bounds = new maplibregl.LngLatBounds()
         .extend(map.current.getCenter())
         .extend(currentDestination);
 
       map.current.fitBounds(bounds, {
-        padding: 50,
-        maxZoom: 6,
+        padding: 20,
+        maxZoom: 15,
+        minZoom: 1,
       });
 
-      marker.current.setLngLat(currentDestination);
+      currentMarker.setLngLat(currentDestination);
     }
   }, [currentDestination]);
 
