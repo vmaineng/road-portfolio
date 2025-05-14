@@ -7,10 +7,11 @@ const nextConfig: NextConfig = {
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      'mapbox-gl': 'maplibre-gl' 
+      'mapbox-gl': 'maplibre-gl'
     };
     return config;
   },
+  transpilePackages: ['maplibre-gl'],
   async headers() {
     return [
       {
