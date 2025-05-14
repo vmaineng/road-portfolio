@@ -140,7 +140,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
   return (
     <div
       ref={mapContainer}
-      style={{ height: "400px", width: "100%", position: "relative" }}
+      className="w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] mx-auto rounded-lg overflow-hidden shadow-md"
     />
   );
 };
