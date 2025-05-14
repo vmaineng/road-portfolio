@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
+import NavBar from "./components/Navbar";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
 import Projects from "./components/Projects";
@@ -24,10 +25,12 @@ const sectionComponents: Record<Section, React.ReactNode> = {
 };
 
 export default function Home() {
+  const [activeSection, setActiveSection] = useState<Section>(Section.ABOUT);
   const [currentSection, setCurrentSection] = useState<Section>(Section.ABOUT);
 
   const handleNavigation = (section: Section) => {
     setCurrentSection(section);
+    document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
   };
 
   const currentDestination = useMemo(
@@ -40,6 +43,7 @@ export default function Home() {
   return (
     <div className="min-h-screen grid grid-rows-[1fr_auto] bg-gray-100 p-4 md:p-8 lg:p-8">
       <main className="flex-grow relative w-full max-w-screen-xl">
+        <NavBar activeSection={activeSection} onNavigate={handleNavigation} />
         <div className="mb-8 w-full ">
           <WorldMapGL
             onNavigate={handleNavigation}
