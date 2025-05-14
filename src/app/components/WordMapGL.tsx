@@ -56,6 +56,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
     marker.current.setLngLat(currentDestination);
 
     Object.entries(destinations).forEach(([section, data]) => {
+      const sectionKey = section as Section;
       const el = document.createElement("div");
       el.style.position = "absolute";
       el.style.width = "20px";
@@ -75,7 +76,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
           zoom: 6,
           essential: true,
         });
-        setTimeout(() => onNavigate(section), 1500);
+        setTimeout(() => onNavigate(sectionKey), 1500);
       });
       mapContainer.current!.appendChild(el);
     });

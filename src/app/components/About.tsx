@@ -9,7 +9,7 @@ const About: React.FC = () => {
           <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-lg border-2 border-accent">
             <Image
               src="/profilePic.png"
-              alt="Your Profile Picture"
+              alt="Profile Picture"
               fill={true}
               style={{ objectFit: "cover" }}
             />
