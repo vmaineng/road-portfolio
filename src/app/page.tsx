@@ -38,9 +38,9 @@ export default function Home() {
   const content = sectionComponents[currentSection] ?? <About />;
 
   return (
-    <div className="min-h-screen grid grid-rows-[1fr_auto] bg-gray-100 p-4 md:p-8">
+    <div className="min-h-screen grid grid-rows-[1fr_auto] bg-gray-100 p-4 md:p-8 lg:p-8">
       <main className="flex-grow relative w-full max-w-screen-xl">
-        <div className="mb-8 w-full md:max-w-screen-md lg:max-w-screen-lg mx-auto">
+        <div className="mb-8 w-full ">
           <WorldMapGL
             onNavigate={handleNavigation}
             currentDestination={currentDestination}
@@ -54,7 +54,9 @@ export default function Home() {
           mountOnEnter
           unmountOnExit
         >
-          <div className="w-full max-w-screen-lg mx-auto">{content}</div>
+          <div className="w-full max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl xl:max-w-screen-2xl mx-auto p-4 md:p-6 lg:p-8 bg-white rounded-lg shadow-xl">
+            {content}
+          </div>
         </CSSTransition>
       </main>
       <Navigation onNavigate={handleNavigation} />
