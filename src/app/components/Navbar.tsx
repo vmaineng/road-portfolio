@@ -1,7 +1,6 @@
-// components/NavBar.tsx
 "use client";
 import { Section } from "./types";
-import Link from "next/link";
+import { useMemo } from "react";
 
 export default function NavBar({
   activeSection,
@@ -10,7 +9,10 @@ export default function NavBar({
   activeSection: Section;
   onNavigate: (section: Section) => void;
 }) {
-  const sections: Section[] = Object.values(Section);
+  const sections = useMemo(() => Object.values(Section), []);
+
+  const formatLabel = (section: Section) =>
+    section.charAt(0).toUpperCase() + section.slice(1);
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white/90 backdrop-blur-sm z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4">
@@ -27,7 +29,7 @@ export default function NavBar({
                     : "text-gray-600 hover:text-blue-500"
                 } transition-colors`}
               >
-                {section.charAt(0).toUpperCase() + section.slice(1)}
+                {formatLabel(section)}
               </button>
             ))}
           </div>
