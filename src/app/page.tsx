@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useMemo } from "react";
+import dynamic from "next/dynamic";
 import NavBar from "./components/Navbar";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
@@ -17,11 +18,11 @@ const DESTINATIONS: Record<Section, Destination> = {
   [Section.CONTACT]: { label: "Contact", coordinates: [-123.133, 49.25] },
 };
 
-const sectionComponents: Record<Section, React.ReactNode> = {
-  [Section.ABOUT]: <About />,
-  [Section.PROJECTS]: <Projects />,
-  [Section.SOCIALS]: <Socials />,
-  [Section.CONTACT]: <Contact />,
+const sectionComponents: Record<Section, () => React.ReactNode> = {
+  [Section.ABOUT]: () => <About />,
+  [Section.PROJECTS]: () => <Projects />,
+  [Section.SOCIALS]: () => <Socials />,
+  [Section.CONTACT]: () => <Contact />,
 };
 
 export default function Home() {
@@ -33,12 +34,9 @@ export default function Home() {
     document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const currentDestination = useMemo(
-    () => DESTINATIONS[currentSection].coordinates,
-    [currentSection]
-  );
+  const currentDestination = DESTINATIONS[currentSection].coordinates;
 
-  const content = sectionComponents[currentSection] ?? <About />;
+  const content = sectionComponents[currentSection]?.() ?? <About />;
 
   return (
     <div className="min-h-screen grid grid-rows-[1fr_auto] bg-gray-100 p-4 md:p-8 lg:p-8">
