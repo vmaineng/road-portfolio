@@ -2,11 +2,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { Section } from "./types";
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "";
 
 interface WorldMapGLProps {
-  onNavigate: (section: string) => void;
+  onNavigate: (section: Section) => void;
   currentDestination: [number, number];
 }
 

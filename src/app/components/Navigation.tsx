@@ -1,27 +1,30 @@
 "use client";
 
 import React, { useState } from "react";
+import { Section } from "./types";
 
 interface NavigationProps {
-  onNavigate: (section: string) => void;
+  onNavigate: (section: Section) => void;
 }
 
-const sections = ["about", "projects", "socials", "contact"];
+const sections = Object.values(Section) as Section[];
 
 const Navigation: React.FC<NavigationProps> = ({ onNavigate }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const handleNext = () => {
     if (currentIndex < sections.length - 1) {
-      setCurrentIndex(currentIndex + 1);
-      onNavigate(sections[currentIndex + 1]);
+      const newIndex = currentIndex + 1;
+      setCurrentIndex(newIndex);
+      onNavigate(sections[newIndex]);
     }
   };
 
   const handlePrevious = () => {
     if (currentIndex > 0) {
-      setCurrentIndex(currentIndex - 1);
-      onNavigate(sections[currentIndex - 1]);
+      const newIndex = currentIndex - 1;
+      setCurrentIndex(newIndex);
+      onNavigate(sections[newIndex]);
     }
   };
 
