@@ -68,6 +68,7 @@ body {
   transform: rotate(-45deg);
   border-left: 1px solid #b01257;
   border-top: 1px solid #b01257;
+  cursor: pointer;
 }
 
 .safety-pin-marker::after {
@@ -80,4 +81,11 @@ body {
   border-radius: 50%;
   background-color: #b01257;
   transform: translateX(-50%);
+}
+.destination-marker {
+  transition: transform 0.3s ease;
+}
+
+.destination-marker:hover {
+  transform: scale(1.2);
 }

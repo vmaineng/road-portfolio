@@ -1,10 +1,8 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import mapboxgl from "mapbox-gl";
+import maplibregl from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { Section } from "./types";
-
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN || "";
 
 interface WorldMapGLProps {
   onNavigate: (section: Section) => void;
@@ -16,8 +14,8 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
   currentDestination,
 }) => {
   const mapContainer = useRef<HTMLDivElement>(null);
-  const map = useRef<mapboxgl.Map | null>(null);
-  const marker = useRef<mapboxgl.Marker | null>(null);
+  const map = useRef<maplibregl.Map | null>(null);
+  const marker = useRef<maplibregl.Marker | null>(null);
   const [lng, setLng] = useState(-118.2437);
   const [lat, setLat] = useState(34.0522);
   const [zoom, setZoom] = useState(2);
@@ -32,10 +30,10 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
   useEffect(() => {
     if (map.current) return;
 
-    map.current = new mapboxgl.Map({
+    map.current = new maplibregl.Map({
       container: mapContainer.current!,
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [0, 0],
+      style: "https://demotiles.maplibre.org/style.json",
+      center: [lng, lat],
       zoom: zoom,
       projection: "globe",
     });
@@ -46,39 +44,40 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
       setZoom(parseFloat(map.current!.getZoom().toFixed(2)));
     });
 
-    const markerEl = document.createElement("div");
-    markerEl.className = "safety-pin-marker";
-    markerEl.style.cursor = "pointer";
-    marker.current = new mapboxgl.Marker(markerEl)
-      .setLngLat(currentDestination)
-      .addTo(map.current!);
-
-    marker.current.setLngLat(currentDestination);
+    // const markerEl = document.createElement("div");
+    // markerEl.className = "safety-pin-marker";
+    // markerEl.style.cursor = "pointer";
+    // marker.current = new maplibregl.Marker(markerEl)
+    //   .setLngLat(currentDestination)
+    //   .addTo(map.current);
 
     Object.entries(destinations).forEach(([section, data]) => {
       const sectionKey = section as Section;
       const el = document.createElement("div");
-      el.style.position = "absolute";
+      el.className = "destination-marker";
       el.style.width = "20px";
       el.style.height = "20px";
-      el.style.backgroundColor = "transparent";
+      el.style.backgroundColor = "red";
       el.style.borderRadius = "50%";
-      el.style.transform = "translate(-50%, -50%)";
       el.style.cursor = "pointer";
-      const [lon, lat] = data.coordinates;
-      const pixel = map.current!.project([lon, lat]);
-      el.style.left = `${pixel.x}px`;
-      el.style.top = `${pixel.y}px`;
+      marker.current = new maplibregl.Marker(el).setLngLat(currentDestination);
 
-      el.addEventListener("click", () => {
-        map.current!.flyTo({
-          center: data.coordinates as [number, number],
-          zoom: 6,
-          essential: true,
+      new maplibregl.Marker(el)
+        .setLngLat(data.coordinates as [number, number])
+        .addTo(map.current!)
+        .getElement()
+        .addEventListener("click", () => {
+          const bounds = new maplibregl.LngLatBounds()
+            .extend(map.current!.getCenter())
+            .extend(data.coordinates as [number, number]);
+
+          map.current!.fitBounds(bounds, {
+            padding: 10,
+            maxZoom: 100,
+          });
+
+          setTimeout(() => onNavigate(sectionKey), 500);
         });
-        setTimeout(() => onNavigate(sectionKey), 1500);
-      });
-      mapContainer.current!.appendChild(el);
     });
 
     return () => {
@@ -90,11 +89,15 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
 
   useEffect(() => {
     if (map.current && marker.current) {
-      map.current.flyTo({
-        center: currentDestination,
-        zoom: 6,
-        essential: true,
+      const bounds = new maplibregl.LngLatBounds()
+        .extend(map.current.getCenter())
+        .extend(currentDestination);
+
+      map.current.fitBounds(bounds, {
+        padding: 50,
+        maxZoom: 6,
       });
+
       marker.current.setLngLat(currentDestination);
     }
   }, [currentDestination]);
