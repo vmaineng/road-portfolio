@@ -6,14 +6,30 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        primary: "#a7f3d0",
-        secondary: "#f59e9b",
-        accent: "#facc15",
-        neutralLight: "#f7f7f7",
-        neutralDark: "#6b7280",
+        primary: {
+          DEFAULT: "#a7f3d0",
+          dark: "#10b981",
+        },
+        secondary: {
+          DEFAULT: "#f59e9b",
+          dark: "ef4444",
+        },
+        accent: {
+          DEFAULT: "#facc15",
+          dark: "#eab308",
+        },
+        neutralLight: {
+          DEFAULT: "#f7f7f7",
+          dark: "eab308",
+        },
+        neutralDark: {
+          light: "#6b7280",
+          dark: "6b7280",
+        },
       },
     },
   },
