@@ -13,26 +13,26 @@ interface Project {
 
 const projectsData: Project[] = [
   {
-    title: "Awesome Portfolio Website",
+    title: "Portfolio Website",
     description: "My personal portfolio showcasing my skills and projects.",
     technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-    website: "https://your-portfolio.com",
+    website: "https://road-portfolio.vercel.app/",
     github: "https://github.com/vmaineng/road-portfolio",
     image: "/profilePic.png",
   },
   {
-    title: "Rephrase statuses",
+    title: "JD-AI (Solo Project)",
     description:
-      "A web application for managing tasks and projects collaboratively.",
-    technologies: ["React", "Open AI API", "Node.js", "Python", "Django"],
-    // website: "https://task-manager-app.com",
-    github: "https://github.com/vmaineng/rephrase-statuses",
-    image: "/profilePic.png",
+      "A web application to help users prepare for behavorial technical interviews",
+    technologies: ["React", "Open AI API", "Supabase", "Google OAuth"],
+    website: "https://jd-ai.vercel.app/",
+    // github: "https://github.com/vmaineng/rephrase-statuses",
+    image: "/jd.png",
   },
   {
-    title: "GridIron Survivor",
+    title: "GridIron Survivor (Group Project)",
     description:
-      "An apprenticeship program for self-taught individuals looking to bridge the gap towards their first development job.",
+      "An apprenticeship program for self-taught individuals. On this group project, I implemented Playwright testing, contributed to code reviews, implemented functionalities such as Spinner when page was loading",
     technologies: [
       "React",
       "Next.js",
