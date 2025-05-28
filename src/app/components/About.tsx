@@ -20,9 +20,9 @@ const About: React.FC = () => {
           Hi, I&apos;m Mai! 👋
         </h1>
         <p className="text-lg mb-6">
-          I&apos;m a software engineer who loves creating products for users of
-          all. My journey stemmed from my first financial analyst job where I
-          was working on automating reports.
+          I&apos;m a software engineer who loves adding life into webpages. My
+          journey into software engineering stemmed from my first financial
+          analyst job where I was working on automating reports.
         </p>
         <p className="text-lg mb-6">
           I specialize in{" "}
@@ -38,7 +38,7 @@ const About: React.FC = () => {
         <p className="text-lg mb-6">
           Beyond coding, I Love eating, exploring, and trying new activities.
           One of my biggest goal is to eat through all of LA and I am sure I
-          barely made a dent.
+          barely made a dent. So many good food to chose from!
         </p>
         <p className="text-lg">
           Thanks for stopping by on my portfolio road trip! I&apos;m excited to
