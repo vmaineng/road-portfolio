@@ -27,13 +27,12 @@ const About: React.FC = () => {
         <p className="text-lg mb-6">
           I specialize in{" "}
           <strong>
-            implementing functionalities between front-end and back-end{" "}
+            implementing functionalities between front-end and back-end with
+            automation{" "}
           </strong>{" "}
-          using technologies like React and Next.js. For example, grabbing a
-          button from the UI and adding life to it so it can submit information
-          to be captured in the backend. I&apos;m also constantly exploring new
-          tools and techniques to expand my skillset, such as V0, Bolt, Remix,
-          and so many more.
+          using technologies like React and Next.js. Coming from a financial
+          analyst background, I&apos;m always looking for ways to automate
+          processes from documentation to implementing new features.
         </p>
         <p className="text-lg mb-6">
           Beyond coding, I Love eating, exploring, and trying new activities.
