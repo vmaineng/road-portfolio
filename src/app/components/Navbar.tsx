@@ -4,6 +4,13 @@ import { useMemo } from "react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
+const stampColors = {
+  [Section.ABOUT]: "border-blue-500",
+  [Section.PROJECTS]: "border-green-500",
+  [Section.SOCIALS]: "border-purple-500",
+  [Section.CONTACT]: "border-orange-500",
+};
+
 export default function NavBar({
   activeSection,
   onNavigate,
@@ -73,11 +80,14 @@ export default function NavBar({
                   onNavigate(section);
                   setIsMenuOpen(false);
                 }}
-                className={`block md:inline-block w-full md:w-auto text-left md:text-center px-3 py-2 md:p-0 ${
-                  activeSection === section
-                    ? "text-blue-600 dark:text-blue-400 font-medium"
-                    : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-                } transition-colors`}
+                className={`block md:inline-block w-full md:w-auto text-left md:text-center px-3 py-2 md:p-0 
+                  ${stampColors[section]}
+    
+                  ${
+                    activeSection === section
+                      ? "text-blue-600 dark:text-blue-400 font-medium"
+                      : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                  } transition-colors`}
               >
                 {formatLabel(section)}
               </button>

@@ -31,6 +31,7 @@ export default function Home() {
 
   const handleNavigation = (section: Section) => {
     setCurrentSection(section);
+    setActiveSection(section);
     document.getElementById(section)?.scrollIntoView({ behavior: "smooth" });
   };
 

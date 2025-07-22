@@ -12,6 +12,7 @@ interface WorldMapGLProps {
 interface Destination {
   label: string;
   coordinates: [number, number];
+  zoom: number;
 }
 
 const WorldMapGL: React.FC<WorldMapGLProps> = ({
@@ -29,14 +30,14 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
   const [zoom, setZoom] = useState(6);
 
   const destinations: Record<Section, Destination> = {
-    about: { label: "About Me", coordinates: [-118.2437, 34.0522] },
-    projects: { label: "Projects", coordinates: [-93.0913, 44.9545] },
-    socials: { label: "Socials", coordinates: [-89.5745, 44.5178] },
-    contact: { label: "Contact", coordinates: [-123.133, 49.25] },
+    about: { label: "About Me", coordinates: [-118.2437, 34.0522], zoom: 9 },
+    projects: { label: "Projects", coordinates: [-93.0913, 44.9545], zoom: 5 },
+    socials: { label: "Socials", coordinates: [-89.5745, 44.5178], zoom: 6 },
+    contact: { label: "Contact", coordinates: [-123.133, 49.25], zoom: 7 },
   };
 
   useEffect(() => {
-    if (map.current) return;
+    if (!mapContainer.current || map.current) return;
 
     map.current = new maplibregl.Map({
       container: mapContainer.current!,
@@ -46,7 +47,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
           osm: {
             type: "raster",
             tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-            tileSize: 40,
+            tileSize: 256,
             attribution: "© OpenStreetMap contributors",
           },
         },

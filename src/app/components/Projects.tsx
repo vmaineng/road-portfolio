@@ -46,6 +46,15 @@ const projectsData: Project[] = [
     github: "https://github.com/LetsGetTechnical/gridiron-survivor",
     image: "/gridiron.png",
   },
+  {
+    title: "Django (Group Project)",
+    description:
+      "Working on Django with implementing features, fixing bugs, reviewing PRs, and updating proceses along the way",
+    technologies: ["Django", "JavaScript", "HTML", "CSS", "Python test"],
+    website: "https://www.djangoproject.com/",
+    github: "https://github.com/vmaineng/django",
+    image: "/django.png",
+  },
 ];
 
 const Projects: React.FC = () => {
