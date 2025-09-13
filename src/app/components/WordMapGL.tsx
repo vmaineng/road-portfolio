@@ -141,7 +141,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
   return (
     <div
       ref={mapContainer}
-      className="w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] mx-auto rounded-lg overflow-hidden shadow-md"
+      className="w-full h-full sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] mx-auto rounded-lg overflow-hidden shadow-md"
     />
   );
 };

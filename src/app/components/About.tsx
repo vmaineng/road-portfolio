@@ -3,8 +3,8 @@ import Image from "next/image";
 
 const About: React.FC = () => {
   return (
-    <div className="bg-gray-800 rounded-lg shadow-md p-6 md:p-8 mx-auto max-w-screen-lg">
-      <section id="about" className="py-6 md:py-8 text-center">
+    <div>
+      {/* <section id="about" className="py-6 md:py-8 text-center">
         <div className="text-center">
           <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden mx-auto mb-4 shadow-lg border-2 border-accent">
             <Image
@@ -48,7 +48,7 @@ const About: React.FC = () => {
           Click &apos;Next Stop&apos; button to see what I&apos;ve been working
           on.
         </span>
-      </section>
+      </section> */}
     </div>
   );
 };

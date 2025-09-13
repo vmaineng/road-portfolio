@@ -39,28 +39,29 @@ const socialsData: SocialLink[] = [
 
 const Socials: React.FC = () => {
   return (
-    <section id="socials" className="py-12 bg-gray-800">
-      <div className="container mx-auto px-4">
-        <h2 className="text-2xl font-bold text-white mb-6 text-center">
-          Let&apos;s Connect!
-        </h2>
-        <div className="flex justify-center items-center gap-8">
-          {socialsData.map((social, index) => (
-            <Link
-              key={index}
-              href={social.href}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span className="text-gray-600 hover:text-blue-600 transition-colors duration-300">
-                {social.icon}
-                <span className="sr-only">{social.alt}</span>{" "}
-              </span>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </section>
+    <div></div>
+    // <section id="socials" className="py-12 bg-gray-800">
+    //   <div className="container mx-auto px-4">
+    //     <h2 className="text-2xl font-bold text-white mb-6 text-center">
+    //       Let&apos;s Connect!
+    //     </h2>
+    //     <div className="flex justify-center items-center gap-8">
+    //       {socialsData.map((social, index) => (
+    //         <Link
+    //           key={index}
+    //           href={social.href}
+    //           target="_blank"
+    //           rel="noopener noreferrer"
+    //         >
+    //           <span className="text-gray-600 hover:text-blue-600 transition-colors duration-300">
+    //             {social.icon}
+    //             <span className="sr-only">{social.alt}</span>{" "}
+    //           </span>
+    //         </Link>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </section>
   );
 };
 
