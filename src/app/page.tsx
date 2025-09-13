@@ -28,6 +28,7 @@ const sectionComponents: Record<Section, () => React.ReactNode> = {
 export default function Home() {
   const [activeSection, setActiveSection] = useState<Section>(Section.ABOUT);
   const [currentSection, setCurrentSection] = useState<Section>(Section.ABOUT);
+  const [showCard, setShowCard] = useState<boolean>(false);
 
   const handleNavigation = (section: Section) => {
     setCurrentSection(section);
