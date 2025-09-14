@@ -16,7 +16,7 @@ module.exports = {
         },
         secondary: {
           DEFAULT: "#f59e9b",
-          dark: "ef4444",
+          dark: "#ef4444",
         },
         accent: {
           DEFAULT: "#facc15",
@@ -24,11 +24,11 @@ module.exports = {
         },
         neutralLight: {
           DEFAULT: "#f7f7f7",
-          dark: "eab308",
+          dark: "#e5e5e5",
         },
         neutralDark: {
           light: "#6b7280",
-          dark: "6b7280",
+          dark: "#374151",
         },
       },
     },

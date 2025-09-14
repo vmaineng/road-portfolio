@@ -5,10 +5,10 @@ import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
 
 const stampColors = {
-  [Section.ABOUT]: "border-blue-500",
-  [Section.PROJECTS]: "border-green-500",
-  [Section.SOCIALS]: "border-purple-500",
-  [Section.CONTACT]: "border-orange-500",
+  [Section.ABOUT]: "border-primary dark:border-primary-dark",
+  [Section.PROJECTS]: "border-secondary dark:border-secondary-dark",
+  [Section.SOCIALS]: "border-accent dark:border-accent-dark",
+  [Section.CONTACT]: "border-orange-500", // Keep this as fallback or create custom color
 };
 
 export default function NavBar({
@@ -31,14 +31,11 @@ export default function NavBar({
   }, []);
 
   if (!mounted) {
-    // Return a neutral version during SSR
     return (
-      <nav className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
+      <nav className="fixed top-0 left-0 right-0 bg-neutralLight shadow-sm z-50">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex justify-between items-center h-16">
-            <div className="text-blue-600 dark:text-blue-400 text-xl font-bold">
-              Mai Vang
-            </div>
+            <div className="text-primary text-xl font-bold">Mai Vang</div>
             <div className="w-8 h-8" />
           </div>
         </div>
@@ -47,13 +44,13 @@ export default function NavBar({
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm z-50 shadow-sm">
+    <nav className="fixed top-0 left-0 right-0 bg-neutralLight/90 dark:bg-neutralDark/90 backdrop-blur-sm z-50 shadow-sm">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center h-16">
-          <div className="text-blue-600 dark:text-blue-400 text-xl font-bold flex-shrink-0">
+          <div className="text-primary dark:text-primary-dark text-xl font-bold flex-shrink-0">
             <button
               onClick={() => onNavigate(Section.ABOUT)}
-              className="text-blue-600 dark:text-blue-400 text-xl font-bold flex-shrink-0 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
+              className="text-primary dark:text-primary-dark text-xl font-bold flex-shrink-0 hover:text-primary-dark dark:hover:text-primary transition-colors"
             >
               Mai Vang
             </button>
@@ -62,7 +59,7 @@ export default function NavBar({
 
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden p-2 rounded-md text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+            className="md:hidden p-2 rounded-md text-neutralDark-light dark:text-neutralLight hover:text-primary dark:hover:text-primary-dark transition-colors"
             aria-label="Toggle menu"
           >
             ☰
@@ -71,7 +68,7 @@ export default function NavBar({
           <div
             className={`${
               isMenuOpen ? "block" : "hidden"
-            } md:flex md:space-x-8`}
+            } md:flex md:space-x-8 absolute md:static top-16 left-0 right-0 bg-neutralLight dark:bg-neutralDark md:bg-transparent md:dark:bg-transparent p-4 md:p-0 shadow-md md:shadow-none transition-colors duration-300`}
           >
             {sections.map((section) => (
               <button
@@ -82,19 +79,18 @@ export default function NavBar({
                 }}
                 className={`block md:inline-block w-full md:w-auto text-left md:text-center px-3 py-2 md:p-0 
                   ${stampColors[section]}
-    
                   ${
                     activeSection === section
-                      ? "text-blue-600 dark:text-blue-400 font-medium"
-                      : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
-                  } transition-colors`}
+                      ? "text-primary dark:text-primary-dark font-medium"
+                      : "text-neutralDark-light dark:text-neutralLight hover:text-primary dark:hover:text-primary-dark"
+                  } transition-colors duration-300`}
               >
                 {formatLabel(section)}
               </button>
             ))}
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="block md:inline-block w-full md:w-auto text-left md:text-center px-3 py-2 md:p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+              className="block md:inline-block w-full md:w-auto text-left md:text-center px-3 py-2 md:p-2 rounded-full hover:bg-neutralLight dark:hover:bg-neutralDark transition-colors duration-300"
             >
               {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
             </button>

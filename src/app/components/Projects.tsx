@@ -17,148 +17,40 @@ export interface SectionProps {
   content: LocationContent;
 }
 
-const projectsData: Project[] = [
-  {
-    title: "Portfolio Website",
-    description: "My personal portfolio showcasing my skills and projects.",
-    technologies: ["React", "Next.js", "Tailwind CSS", "Vercel"],
-    website: "https://road-portfolio.vercel.app/",
-    github: "https://github.com/vmaineng/road-portfolio",
-    image: "/profilePic.png",
-  },
-  {
-    title: "JD-AI (Solo Project)",
-    description:
-      "A web application to help users prepare for behavorial technical interviews",
-    technologies: ["React", "Open AI API", "Supabase", "Google OAuth"],
-    website: "https://jd-ai.vercel.app/",
-    // github: "https://github.com/vmaineng/rephrase-statuses",
-    image: "/jd.png",
-  },
-  {
-    title: "GridIron Survivor (Group Project)",
-    description:
-      "An apprenticeship program for self-taught individuals. On this group project, I implemented Playwright testing, contributed to code reviews, implemented functionalities such as Spinner when page was loading",
-    technologies: [
-      "React",
-      "Next.js",
-      "Node.js",
-      "Express",
-      "Appwrite",
-      "Jest",
-      "Playwright",
-    ],
-    website: "https://www.gridironsurvivor.com/",
-    github: "https://github.com/LetsGetTechnical/gridiron-survivor",
-    image: "/gridiron.png",
-  },
-  {
-    title: "Django (Group Project)",
-    description:
-      "Working on Django with implementing features, fixing bugs, reviewing PRs, and updating proceses along the way",
-    technologies: ["Django", "JavaScript", "HTML", "CSS", "Python test"],
-    website: "https://www.djangoproject.com/",
-    github: "https://github.com/vmaineng/django",
-    image: "/django.png",
-  },
-];
-
 const Projects: React.FC<SectionProps> = ({ content }) => {
   return (
-    <div>
-      <div>
-        <h2 className="text-2xl font-bold">{content.title}</h2>
-        <p className="text-gray-600">{content.subtitle}</p>
-        <p className="mt-2">{content.description}</p>
+    <div className="text-neutralDark-dark dark:text-neutralLight transition-colors duration-300">
+      <h2 className="text-2xl font-bold text-primary dark:text-primary-dark">
+        {content.title}
+      </h2>
+      <p className="text-neutralDark-light dark:text-neutralLight/90">
+        {content.subtitle}
+      </p>
+      <p className="mt-2">{content.description}</p>
 
-        <ul className="list-disc list-inside mt-4">
-          {content.details?.map((detail, idx) => (
-            <li key={idx}>{detail}</li>
-          ))}
-        </ul>
-        {content.skills && (
-          <div className="mt-4">
-            <h3 className="font-semibold">Skills:</h3>
-            <div className="flex flex-wrap gap-2 mt-2">
-              {content.skills.map((skill, idx) => (
-                <span
-                  key={idx}
-                  className="px-2 py-1 bg-gray-200 rounded-md text-sm"
-                >
-                  {skill}
-                </span>
-              ))}
-            </div>
+      <ul className="list-disc list-inside mt-4 space-y-1">
+        {content.details?.map((detail, idx) => (
+          <li key={idx}>{detail}</li>
+        ))}
+      </ul>
+      {content.skills && (
+        <div className="mt-4">
+          <h3 className="font-semibold text-primary dark:text-primary-dark">
+            Skills:
+          </h3>
+          <div className="flex flex-wrap gap-2 mt-2">
+            {content.skills.map((skill, idx) => (
+              <span
+                key={idx}
+                className="px-2 py-1 bg-primary/20 dark:bg-primary-dark/20 text-primary-dark dark:text-primary rounded-md text-sm font-medium transition-colors duration-300"
+              >
+                {skill}
+              </span>
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-    // <section id="projects" className="py-4 bg-gray-800">
-    //   <div className="container mx-auto px-4">
-    //     <h2 className="text-3xl font-bold text-white mb-8 text-center">
-    //       Projects I&apos;ve Worked On
-    //     </h2>
-    //     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-    //       {projectsData.map((project, index) => (
-    //         <div
-    //           key={index}
-    //           className="bg-white rounded-lg shadow-md overflow-hidden"
-    //         >
-    //           <div className="relative h-48 w-full">
-    //             <Image
-    //               src={project.image}
-    //               alt={project.title}
-    //               fill={true}
-    //               style={{ objectFit: "cover" }}
-    //             />
-    //           </div>
-    //           <div className="p-6">
-    //             <h3 className="text-xl font-semibold text-gray-700 mb-2">
-    //               {project.title}
-    //             </h3>
-    //             <p className="text-gray-600 text-sm mb-4">
-    //               {project.description}
-    //             </p>
-    //             <div className="flex flex-wrap gap-2 mb-4">
-    //               {project.technologies.map((tech) => (
-    //                 <span
-    //                   key={tech}
-    //                   className="inline-block bg-blue-100 text-blue-800 text-xs font-semibold rounded-full px-2 py-1"
-    //                 >
-    //                   {tech}
-    //                 </span>
-    //               ))}
-    //             </div>
-    //             <div className="flex gap-4">
-    //               {project.website && (
-    //                 <Link
-    //                   href={project.website}
-    //                   target="_blank"
-    //                   rel="noopener noreferrer"
-    //                 >
-    //                   <button className="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
-    //                     Website
-    //                   </button>
-    //                 </Link>
-    //               )}
-    //               {project.github && (
-    //                 <Link
-    //                   href={project.github}
-    //                   target="_blank"
-    //                   rel="noopener noreferrer"
-    //                 >
-    //                   <button className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">
-    //                     GitHub
-    //                   </button>
-    //                 </Link>
-    //               )}
-    //             </div>
-    //           </div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </section>
   );
 };
 
