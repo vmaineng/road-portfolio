@@ -21,7 +21,7 @@ export const locationContent: Record<Section, LocationContent> = {
     ],
     skills: ["React", "TypeScript", "JavaScript", "CSS", "HTML"],
     image:
-      "https://images.unsplash.com/photo-1711470090847-066c1b486bd2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsb3MlMjBhbmdlbGVzJTIwY2l0eXNjYXBlfGVufDF8fHx8MTc1NzcyNDc2OXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+      "/profile.png",
   },
   [Section.PROJECTS]: {
     id: "projects",
