@@ -63,6 +63,10 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
       zoom: zoom,
     });
 
+    map.current.on("load", () => {
+      map.current!.resize(); // ensure map fills the container
+    });
+
     map.current.on("move", () => {
       setLng(parseFloat(map.current!.getCenter().lng.toFixed(4)));
       setLat(parseFloat(map.current!.getCenter().lat.toFixed(4)));
@@ -138,12 +142,7 @@ const WorldMapGL: React.FC<WorldMapGLProps> = ({
     }
   }, [currentDestination]);
 
-  return (
-    <div
-      ref={mapContainer}
-      className="w-full h-full sm:h-80 md:h-96 lg:h-[28rem] xl:h-[32rem] mx-auto rounded-lg overflow-hidden shadow-md"
-    />
-  );
+  return <div ref={mapContainer} className="w-full h-full" />;
 };
 
 export default WorldMapGL;
