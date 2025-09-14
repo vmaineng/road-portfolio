@@ -24,3 +24,7 @@ export enum Section {
   skills?: string[];
   image?: string;
 }
+
+export interface SectionProps {
+  content: LocationContent;
+}

@@ -10,6 +10,7 @@ import { CSSTransition } from "react-transition-group";
 import WorldMapGL from "./components/WordMapGL";
 import { Destination, Section, LocationContent } from "./components/types";
 import { LocationCard } from "./components/LocationCard";
+import { SectionProps } from "./components/types";
 
 const DESTINATIONS: Record<Section, Destination> = {
   [Section.ABOUT]: { label: "About Me", coordinates: [-118.2437, 34.0522] },
@@ -108,11 +109,11 @@ const locationContent: Record<Section, LocationContent> = {
   },
 };
 
-const sectionComponents: Record<Section, () => React.ReactNode> = {
-  [Section.ABOUT]: () => <About />,
-  [Section.PROJECTS]: () => <Projects />,
-  [Section.SOCIALS]: () => <Socials />,
-  [Section.CONTACT]: () => <Contact />,
+const sectionComponents: Record<Section, React.FC<SectionProps>> = {
+  [Section.ABOUT]: About,
+  [Section.PROJECTS]: Projects,
+  [Section.SOCIALS]: Socials,
+  [Section.CONTACT]: Contact,
 };
 
 export default function Home() {
@@ -132,10 +133,12 @@ export default function Home() {
   };
 
   const currentDestination = DESTINATIONS[currentSection].coordinates;
-  const content = sectionComponents[currentSection]?.() ?? <About />;
+  // const content = sectionComponents[currentSection]?.() ?? <About />;
+  const SectionComponent = sectionComponents[currentSection] || About;
+  const sectionData = locationContent[currentSection];
 
   return (
-    <div className="relative min-h-screen bg-gray-100">
+    <div className="size-full relative overflow-hidden">
       <div className="relative z-10 min-h-screen flex flex-col">
         <NavBar activeSection={activeSection} onNavigate={handleNavigation} />
         <div className="mb-8 w-full flex justify-center ">
@@ -155,7 +158,7 @@ export default function Home() {
               unmountOnExit
             >
               <div className="w-full max-w-screen-md md:max-w-screen-lg lg:max-w-screen-xl xl:max-w-screen-2xl mx-auto p-4 md:p-6 lg:p-8 bg-white rounded-lg shadow-xl">
-                {content}
+                <SectionComponent content={sectionData} />
               </div>
             </CSSTransition>
           </div>
