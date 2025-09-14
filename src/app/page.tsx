@@ -66,9 +66,8 @@ export default function Home() {
           </div>
         )}
       </div>
-      <div className="sticky bottom-0 bg-white/80 backdrop-blur-sm z-20">
-        <Navigation onNavigate={handleNavigation} />
-      </div>
+
+      <Navigation onNavigate={handleNavigation} />
 
       <LocationCard
         content={locationContent[currentSection]}
