@@ -30,7 +30,7 @@ const About: React.FC<SectionProps> = ({ content }) => {
             {content.skills.map((skill, idx) => (
               <span
                 key={idx}
-                className="px-2 py-1 bg-primary/20 dark:bg-primary-dark/20 text-primary-dark dark:text-primary rounded-md text-sm font-medium transition-colors duration-300"
+                className="px-2 py-1 bg-secondary/20 dark:bg-secondary-dark/20 text-secondary-dark dark:text-secondary rounded-md text-sm font-medium transition-colors duration-300"
               >
                 {skill}
               </span>
