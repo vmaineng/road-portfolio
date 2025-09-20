@@ -13,11 +13,11 @@ export const locationContent: Record<Section, LocationContent> = {
     title: "About Me",
     subtitle: "Los Angeles, CA",
     description:
-      "I'm a software developer based in Los Angeles with expertise in React, TypeScript, and User Experience.",
+      "I’m a UX Engineer who bridges the gap between design and code.",
     details: [
       "2+ years of experience in web development",
       "Specialized in frontend technologies",
-      "Passionate about user experience and clean code",
+      "Passionate about user experience and journey through web pages",
     ],
     skills: ["React", "TypeScript", "JavaScript", "CSS", "HTML"],
     image:

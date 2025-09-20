@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import NavBar from "./components/Navbar";
 import Navigation from "./components/Navigation";
 import About from "./components/About";
@@ -67,7 +67,10 @@ export default function Home() {
         )}
       </div>
 
-      <Navigation onNavigate={handleNavigation} />
+      <Navigation
+        currentSection={currentSection}
+        onNavigate={handleNavigation}
+      />
 
       <LocationCard
         content={locationContent[currentSection]}
