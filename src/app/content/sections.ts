@@ -13,10 +13,10 @@ export const locationContent: Record<Section, LocationContent> = {
     title: "About Me",
     subtitle: "Los Angeles, CA",
     description:
-      "I’m a UX Engineer who bridges the gap between design and code.",
+      "I’m a Web UI Develope focused on implementation.",
     details: [
       "2+ years of experience in web development",
-      "Specialized in frontend technologies",
+      "Specialized in taking UI/UX designs and translating them into clean, semantic, and performant code",
       "Passionate about user experience and journey through web pages",
     ],
     skills: ["React", "TypeScript", "JavaScript", "CSS", "HTML"],
